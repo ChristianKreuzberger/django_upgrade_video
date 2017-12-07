@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Welcome to the Ticket System" %}
+{% endblock %}
+
+{% block content %}
+    {% if not is_authenticated %}
+        {% blocktrans trimmed %}
+            <p>You are not authenticated!</p>
+        {% endblocktrans %}
+        <ul>
+            <li>
+                <a href="{% url 'authentication:login' %}">{% trans "Login" %}</a>
+            </li>
+            <li>
+                <a href="{% url 'authentication:registration' %}">{% trans "Sign up" %}</a>
+            </li>
+        </ul>
+
+    {% else %}
+        <p>{%  trans "Please click on the menu entries at the top" %}
+    {% endif %}
+{% endblock %}
