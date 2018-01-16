@@ -12,7 +12,8 @@ class MainView(View):
 
     def get(self, request):
         context = Context({
-            'is_authenticated': request.user.is_authenticated()
+            'is_authenticated': request.user.is_authenticated(),
+            'user': request.user
         })
 
         return render(request, self.template_name, context)

@@ -1,7 +1,7 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.template import Context
+from django.template import RequestContext
 from django.views.generic import View
 
 from tickets.authentication.forms import LoginForm, RegistrationForm
@@ -16,27 +16,45 @@ class LoginView(View):
     template_name = 'authentication/login.html',
 
     def get(self, request):
-        form = LoginView()
+        form = LoginForm()
 
-        context = Context({
+        context = RequestContext(request, {
             'form': form
         })
 
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            # ToDo: log the user in using auth backend
+        form = LoginForm(request.POST or None)
 
-            # ToDo: redirect to login view
-            return HttpResponseRedirect('/success/')
-
-        context = {
+        context = RequestContext(request, {
             'form': form
-        }
+        })
+
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # the password verified for the user
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    context.update({'inactive': True})
+            else:
+                # the authentication system was unable to verify the username and password
+                context.update({'wrong_credentials': True})
 
         return render(request, self.template_name, context)
+
+
+class LogoutView(View):
+
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect('/good-bye/')
 
 
 class RegistrationView(View):
@@ -48,23 +66,25 @@ class RegistrationView(View):
     def get(self, request):
         form = RegistrationForm()
 
-        context = Context({
+        context = RequestContext(request, {
             'form': form
         })
 
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        form = RegistrationForm()
+        form = RegistrationForm(request.POST or None)
         if form.is_valid():
             # sign up a new user
             User.objects.create_user(form.data['username'], form.data['email'], form.data['password'])
 
+            # Todo: Show the user a notification
+
             # ToDo: redirect to login view
             return HttpResponseRedirect('/success/')
 
-        context = {
+        context = RequestContext(request, {
             'form': form
-        }
+        })
 
         return render(request, self.template_name, context)

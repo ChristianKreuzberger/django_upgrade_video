@@ -60,10 +60,10 @@
                 {% if user.is_authenticated %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        Current User <span class="caret"></span>
+                        {{ user }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="logout">{% trans "Logout" %}</a></li>
+                        <li><a href="{% url 'authentication:logout' %}">{% trans "Logout" %}</a></li>
                     </ul>
                 </li>
                 {% else %}

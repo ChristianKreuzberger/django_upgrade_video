@@ -2,9 +2,38 @@
 {% load i18n %}
 
 {% block title %}
-{% trans "Login" %}
+    {% trans "Login" %}
 {% endblock %}
 
 {% block content %}
-Login form
+    <h3>{% trans "Login" %}</h3>
+    <div class="container">
+        <form action="{% url "authentication:login" %}" method="post" class="form-horizontal">
+            {{ form.non_field_errors }}
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="{{ form.username.id_for_label }}">
+                    {% trans 'Username' %}:
+                </label>
+                <div class="col-sm-6">
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="{{ form.password.id_for_label }}">
+                    {% trans 'Password' %}:
+                </label>
+                <div class="col-sm-6">
+                    {{ form.password }}
+                    {{ form.password.errors }}
+                </div>
+            </div>
+
+            <input type="submit" value="{% trans 'Log in' %}" />
+        </form>
+    </div>
 {% endblock %}
