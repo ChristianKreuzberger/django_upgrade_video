@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Ticket List" %}
+{% endblock %}
+
+{% block content %}
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3">
+                Title
+            </label>
+            <div class="col-sm-9">
+                <input type="text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3">
+                Description
+            </label>
+            <div class="col-sm-9">
+                <textarea></textarea>
+            </div>
+        </div>
+    </form>
+{% endblock %}

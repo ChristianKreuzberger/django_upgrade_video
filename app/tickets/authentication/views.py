@@ -13,7 +13,7 @@ class LoginView(View):
     """
     A basic login view
     """
-    template_name = 'authentication/login.html',
+    template_name = 'authentication/login.html'
 
     def get(self, request):
         form = LoginForm()

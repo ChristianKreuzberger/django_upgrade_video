@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^auth/', include('tickets.authentication.urls', namespace='authentication')),
     url(r'^tickets/', include('tickets.tickets.urls', namespace='tickets')),
     url(r'^comments/', include('tickets.comments.urls', namespace='comments')),
-    url(r'$', include('tickets.core.urls', namespace='core')),
+    url(r'', include('tickets.core.urls', namespace='core')),
 ]

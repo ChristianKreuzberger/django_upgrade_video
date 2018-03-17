@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Ticket List" %}
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for ticket in tickets %}
+        <li>
+            {{ ticket.title }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
