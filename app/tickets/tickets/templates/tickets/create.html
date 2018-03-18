@@ -2,27 +2,36 @@
 {% load i18n %}
 
 {% block title %}
-{% trans "Ticket List" %}
+    {% trans "Ticket List" %}
 {% endblock %}
 
 {% block content %}
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label class="col-sm-3">
-                Title
-            </label>
-            <div class="col-sm-9">
-                <input type="text">
-            </div>
-        </div>
+    <form action="{% url "tickets:create" %}" method="post"
+          class="form-horizontal">
+        {% csrf_token %}
 
-        <div class="form-group">
-            <label class="col-sm-3">
-                Description
-            </label>
-            <div class="col-sm-9">
-                <textarea></textarea>
+        <p class="help">
+            {{ create_ticket_form.non_field_errors }}
+        </p>
+
+        {% for field in create_ticket_form %}
+            <div class="form-group">
+                <label class="col-sm-3">
+                    {{ field.label_tag }}
+                </label>
+                <div class="col-sm-9">
+                    {{ field }}
+                    <br />
+
+                    {{ field.errors }}
+
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        {% endfor %}
+
+        <input type="submit" value="Create new Ticket" />
     </form>
 {% endblock %}
