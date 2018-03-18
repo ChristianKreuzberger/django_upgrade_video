@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Edit Ticket" %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url "tickets:edit" ticket.pk %}" method="post"
+          class="form-horizontal">
+        {% csrf_token %}
+
+        <p class="help">
+            {{ edit_ticket_form.non_field_errors }}
+        </p>
+
+        {% for field in edit_ticket_form %}
+            <div class="form-group">
+                <label class="col-sm-3">
+                    {{ field.label_tag }}
+                </label>
+                <div class="col-sm-9">
+                    {{ field }}
+                    <br />
+
+                    {{ field.errors }}
+
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <input type="submit" value="Save" />
+    </form>
+{% endblock %}

@@ -9,7 +9,7 @@
     <ul>
         {% for ticket in tickets %}
         <li>
-            {{ ticket.title }}
+            <a href="{% url 'tickets:view' ticket.pk %}">{{ ticket.title }}</a>
         </li>
         {% endfor %}
     </ul>
