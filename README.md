@@ -10,7 +10,7 @@ user has their individual "My Tickets" page.
 
 Each ticket can be commented on by users.
 
-This example application makes use of Foreign Keys, Many-To-Many Fields and the authentication middleware.
+This example application makes use of Foreign Keys, Many-To-Many Fields, template tags, middlewares, views, etc... - a typical Django app.
 
 for more information about the application (e.g., installation instructions), please take a look at [docs/app.md](docs/app.md).
 
