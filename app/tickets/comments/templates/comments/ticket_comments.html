@@ -1,9 +1,12 @@
 {# display all comments of the provided ticket #}
 {% for comment in ticket.comments.all %}
-    <div>
-    <b>{{ comment.created_by }} commented at {{ comment.created_at }}:</b><br />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ comment.created_by }} commented at {{ comment.created_at }}:
+        </div>
+        <div class="panel-body">
+            {{ comment.text | linebreaksbr }}
 
-        {{ comment.text | linebreaksbr }}
-
+        </div>
     </div>
 {% endfor %}
