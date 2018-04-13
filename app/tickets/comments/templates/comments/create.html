@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Create Ticket" %}
+{% endblock %}
+
+{% block content %}
+
+    <h3>{% blocktrans %}You are commenting on '{{ ticket }}'{% endblocktrans %}</h3>
+
+    <form action="{% url "comments:create" ticket.pk %}" method="post"
+          class="form-horizontal">
+        {% csrf_token %}
+
+        <p class="help">
+            {{ create_comment_form.non_field_errors }}
+        </p>
+
+        {% for field in create_comment_form %}
+            <div class="form-group">
+                <label class="col-sm-3">
+                    {{ field.label_tag }}
+                </label>
+                <div class="col-sm-9">
+                    {{ field }}
+                    <br />
+
+                    {{ field.errors }}
+
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <input type="submit" value="Create new Comment" />
+    </form>
+{% endblock %}

@@ -17,4 +17,10 @@
     <pre>
     {{ ticket.description }}
     </pre>
+
+    {# display comment form #}
+    <a href="{% url 'comments:create' ticket.pk %}">Create a new comment</a>
+
+    {# display comment list #}
+    {% include "comments/ticket_comments.html" with ticket=ticket %}
 {% endblock %}

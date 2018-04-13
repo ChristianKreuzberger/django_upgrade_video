@@ -1,0 +1,9 @@
+{# display all comments of the provided ticket #}
+{% for comment in ticket.comments.all %}
+    <div>
+    <b>{{ comment.created_by }} commented at {{ comment.created_at }}:</b><br />
+
+        {{ comment.text | linebreaksbr }}
+
+    </div>
+{% endfor %}
