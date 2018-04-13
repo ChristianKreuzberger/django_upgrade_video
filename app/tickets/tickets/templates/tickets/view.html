@@ -7,7 +7,7 @@
 
 {% block content %}
     <h1>
-        {{ ticket.title }}
+        {{ ticket }}
         <a href="{% url 'tickets:edit' ticket.pk %}" class="btn btn-default">{% trans "Edit" %}</a>
     </h1>
     <label>{% trans "Created by" %}:</label> {{ ticket.created_by }}<br />

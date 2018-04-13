@@ -31,3 +31,6 @@ class Comment(models.Model):
         verbose_name=_("When was the comment created"),
         db_index=True
     )
+
+    def __str__(self):
+        return _("Comment from %(date)s on ticket %(ticket)s") % {'date': self.created_at, 'ticket': self.ticket}

@@ -2,10 +2,15 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Edit Ticket" %}
+    {% blocktrans %}Edit {{ ticket }}{% endblocktrans %}
 {% endblock %}
 
 {% block content %}
+    <h1>
+        {% blocktrans %}Edit {{ ticket }}{% endblocktrans %}
+    </h1>
+
+
     <form action="{% url "tickets:edit" ticket.pk %}" method="post"
           class="form-horizontal">
         {% csrf_token %}

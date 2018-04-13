@@ -20,6 +20,14 @@
         </ul>
 
     {% else %}
-        <p>{%  trans "Welcome! Please have a look at the tickets!" %}
+        <p>{%  trans "Welcome! Please have a look at the tickets!" %}</p>
+
+        <p><b>{%  trans "You are currently responsible for the following tickets:" %}</b></p>
+
+        <ul>
+            {% for ticket in your_tickets %}
+                <li><a href="{% url 'tickets:view' ticket.pk %}">{{ ticket }}</a></li>
+            {% endfor %}
+        </ul>
     {% endif %}
 {% endblock %}
