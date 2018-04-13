@@ -1,7 +1,6 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.template import RequestContext
 from django.views.generic import View, DetailView
 
 
@@ -13,9 +12,9 @@ class ListTicketsView(View):
     template_name = 'tickets/list.html'
 
     def get(self, request):
-        context = RequestContext(request, {
+        context = {
             'tickets': Ticket.objects.all()
-        })
+        }
 
         return render(request, self.template_name, context)
 
@@ -30,18 +29,18 @@ class CreateTicketView(View):
     def get(self, request):
         create_ticket_form = CreateTicketForm()
 
-        context = RequestContext(request, {
+        context = {
             'create_ticket_form': create_ticket_form
-        })
+        }
 
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         create_ticket_form = CreateTicketForm(request.POST or None)
 
-        context = RequestContext(request, {
+        context = {
             'create_ticket_form': create_ticket_form
-        })
+        }
 
         current_user = request.user
 
@@ -77,10 +76,10 @@ class EditTicketView(View):
 
         edit_ticket_form = CreateTicketForm(instance=ticket)
 
-        context = RequestContext(request, {
+        context = {
             'ticket': ticket,
             'edit_ticket_form': edit_ticket_form
-        })
+        }
 
         return render(request, self.template_name, context)
 
@@ -89,10 +88,10 @@ class EditTicketView(View):
 
         edit_ticket_form = CreateTicketForm(request.POST or None, instance=ticket)
 
-        context = RequestContext(request, {
+        context = {
             'ticket': ticket,
             'edit_ticket_form': edit_ticket_form
-        })
+        }
 
         if edit_ticket_form.is_valid():
             edit_ticket_form.save()

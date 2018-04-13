@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.template import RequestContext
 from django.views.generic import View
 
 from tickets.authentication.forms import LoginForm, RegistrationForm
@@ -18,18 +17,18 @@ class LoginView(View):
     def get(self, request):
         form = LoginForm()
 
-        context = RequestContext(request, {
+        context = {
             'form': form
-        })
+        }
 
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         form = LoginForm(request.POST or None)
 
-        context = RequestContext(request, {
+        context = {
             'form': form
-        })
+        }
 
         if form.is_valid():
             username = request.POST['username']
@@ -66,9 +65,9 @@ class RegistrationView(View):
     def get(self, request):
         form = RegistrationForm()
 
-        context = RequestContext(request, {
+        context = {
             'form': form
-        })
+        }
 
         return render(request, self.template_name, context)
 
@@ -83,8 +82,8 @@ class RegistrationView(View):
             # ToDo: redirect to login view
             return HttpResponseRedirect('/success/')
 
-        context = RequestContext(request, {
+        context = {
             'form': form
-        })
+        }
 
         return render(request, self.template_name, context)

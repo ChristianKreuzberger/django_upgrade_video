@@ -30,9 +30,21 @@ class StoreRequestMiddleware(object):
     function.
     """
 
-    def process_request(self, request):
+    def __init__(self, get_response):
+        self.get_response = get_response
+        # One-time configuration and initialization.
+
+    def __call__(self, request):
+        # Code to be executed for each request before
+        # the view (and later middleware) are called.
+
         set_current_request(request)
 
-    def process_response(self, request, response):
+        response = self.get_response(request)
+
         set_current_request(None)
+
+        # Code to be executed for each request/response after
+        # the view is called.
+
         return response

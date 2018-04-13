@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
                 ('text', models.TextField(verbose_name='Comment')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='When was the comment created', db_index=True)),
-                ('created_by', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='comments_created_by_user', verbose_name='Who created the comment')),
-                ('ticket', models.ForeignKey(to='tickets.Ticket', related_name='comments', verbose_name='Which ticket is this comment for')),
+                ('created_by', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments_created_by_user', verbose_name='Who created the comment')),
+                ('ticket', models.ForeignKey(to='tickets.Ticket', on_delete=models.CASCADE, related_name='comments', verbose_name='Which ticket is this comment for')),
             ],
             options={
                 'verbose_name_plural': 'Comments',

@@ -15,10 +15,10 @@ class MainView(View):
     def get(self, request):
         current_user = request.user
 
-        context = Context({
+        context = {
             'is_authenticated': current_user.is_authenticated(),
             'user': current_user
-        })
+        }
 
         if current_user.is_authenticated():
             # fetch all tickets of that user

@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(verbose_name='When was the ticket created', auto_now_add=True)),
                 ('status', models.CharField(verbose_name='What is the status of the ticket', default='new', choices=[('new', 'New'), ('pro', 'In progress'), ('fin', 'Finished'), ('tes', 'Testing'), ('wfx', 'Wont fix')], max_length=3)),
                 ('assigned_to', models.ManyToManyField(verbose_name='Who is responsible for the ticket', to=settings.AUTH_USER_MODEL)),
-                ('created_by', models.ForeignKey(verbose_name='Who created the ticket', related_name='tickets_created_by_user', to=settings.AUTH_USER_MODEL)),
+                ('created_by', models.ForeignKey(verbose_name='Who created the ticket', on_delete=models.CASCADE, related_name='tickets_created_by_user', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'Ticket',

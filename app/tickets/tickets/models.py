@@ -39,6 +39,7 @@ class Ticket(models.Model):
 
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
         related_name="tickets_created_by_user",
         verbose_name=_("Who created the ticket")
     )
