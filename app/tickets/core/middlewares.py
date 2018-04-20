@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from threading import local
 
+from django.utils.deprecation import MiddlewareMixin
+
 _thread_locals = local()
 
 
@@ -29,10 +31,20 @@ class StoreRequestMiddleware(object):
     request everywhere, and don't need to pass it to every
     function.
     """
+    def __init__(self, get_response=None):
+        self.get_response = get_response
 
-    def process_request(self, request):
+    def __call__(self, request):
+        # Code to be executed for each request before
+        # the view (and later middleware) are called.
+
         set_current_request(request)
 
-    def process_response(self, request, response):
+        response = self.get_response(request)
+
+        # Code to be executed for each request/response after
+        # the view is called.
+
         set_current_request(None)
+
         return response

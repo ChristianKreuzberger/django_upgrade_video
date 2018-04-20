@@ -24,6 +24,7 @@ class Comment(models.Model):
         settings.AUTH_USER_MODEL,
         related_name="comments_created_by_user",
         verbose_name=_("Who created the comment"),
+        on_delete=models.CASCADE
     )
 
     created_at = models.DateTimeField(

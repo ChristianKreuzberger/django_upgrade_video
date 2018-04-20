@@ -16,7 +16,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('tickets.authentication.urls', namespace='authentication')),
     url(r'^tickets/', include('tickets.tickets.urls', namespace='tickets')),
     url(r'^comments/', include('tickets.comments.urls', namespace='comments')),

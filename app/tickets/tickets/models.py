@@ -40,7 +40,8 @@ class Ticket(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="tickets_created_by_user",
-        verbose_name=_("Who created the ticket")
+        verbose_name=_("Who created the ticket"),
+        on_delete=models.CASCADE
     )
 
     created_at = models.DateTimeField(
