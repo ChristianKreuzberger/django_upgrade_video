@@ -54,7 +54,7 @@ class LogoutView(View):
 
     def get(self, request):
         logout(request)
-        return HttpResponseRedirect('/good-bye/')
+        return HttpResponseRedirect('/')
 
 
 class RegistrationView(View):
@@ -81,7 +81,7 @@ class RegistrationView(View):
             # Todo: Show the user a notification
 
             # ToDo: redirect to login view
-            return HttpResponseRedirect('/success/')
+            return HttpResponseRedirect('/')
 
         context = RequestContext(request, {
             'form': form

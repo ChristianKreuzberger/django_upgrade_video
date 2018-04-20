@@ -57,7 +57,7 @@ class CreateTicketView(View):
             # assignee is a M2M field which needs to be filled after we create the ticket
             ticket.assigned_to.add(create_ticket_form.data['assigned_to'])
 
-            return HttpResponseRedirect(reverse('tickets:view', {'pk': ticket.pk}))
+            return HttpResponseRedirect(reverse('tickets:view', kwargs={'pk': ticket.pk}))
 
         return render(request, self.template_name, context)
 
