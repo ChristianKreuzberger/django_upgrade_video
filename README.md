@@ -2,7 +2,7 @@
 This repo contains information about upgrading your Django application from Django 1.8 to Django 1.11, and
 from Django 1.11 to Django 2.2. Those are all long term support (LTS) releases.
 
-Please also take a look at this YouTube Video for more information.
+Please also take a look at this [YouTube Video](https://www.youtube.com/watch?v=-_nq0s46Dnc) for more information.
 
 ## Example Application
 
