@@ -2,6 +2,8 @@
 This repo contains information about upgrading your Django application from Django 1.8 to Django 1.11, and
 from Django 1.11 to Django 2.2. Those are all long term support (LTS) releases.
 
+Please also take a look at this YouTube Video for more information.
+
 ## Example Application
 
 As an example application, we prepared a very basic ticket system, which allows creating aswell as editing
@@ -13,6 +15,14 @@ Each ticket can be commented on by users.
 This example application makes use of Foreign Keys, Many-To-Many Fields, template tags, middlewares, views, etc... - a typical Django app.
 
 for more information about the application (e.g., installation instructions), please take a look at [docs/app.md](docs/app.md).
+
+## Branches
+
+Please take a look at the following branches:
+
+* django18 - contains the app the way it used to be with Django 1.8
+* django18_to_111 - contains all commits for upgrading from 1.8 to 1.11
+* master - ongoing development
 
 ## The process of upgrading
 
