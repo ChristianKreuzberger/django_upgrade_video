@@ -7,4 +7,8 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+COPY ./docker/python/entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
