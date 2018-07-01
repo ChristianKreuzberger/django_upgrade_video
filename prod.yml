@@ -1,17 +1,19 @@
 version: '3'
 volumes:
   pgdata:
+  static_files:
 services:
   python:
     # image: python:3.4
     build:
       context: .
-      dockerfile: docker/dev/python/Dockerfile
+      dockerfile: docker/prod/python/Dockerfile
     volumes:
       - ./app:/app
+      - static_files:/static_files
     ports:
       - 8000:8000
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn -w 4 tickets.wsgi -b 0.0.0.0:8000
   postgres:
     image: postgres:10.3
     environment:
@@ -22,3 +24,12 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
+  nginx:
+    # image: nginx
+    build:
+      context: .
+      dockerfile: docker/prod/nginx/Dockerfile
+    volumes:
+      - static_files:/static_files
+    ports:
+      - 8080:80
