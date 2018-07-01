@@ -1,4 +1,4 @@
-{% load i18n is_active %}
+{% load i18n is_active staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,6 +85,11 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
+<a href="https://github.com/ChristianKreuzberger">
+    <img style="position: absolute; top: 0; left: 0; border: 0; z-index: 10000"
+         src="{% static "forkme_left_red_aa0000.png" %}" alt="Fork me on GitHub">
+</a>
 
 <div class="container">
     {% block content %}
