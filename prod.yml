@@ -8,6 +8,8 @@ services:
     build:
       context: .
       dockerfile: docker/prod/python/Dockerfile
+    environment:
+      - DJANGO_SETTINGS_MODULE=tickets.settings.prod
     volumes:
       - ./app:/app
       - static_files:/static_files
