@@ -49,3 +49,7 @@ As 2.2 has not been released, we will only cover preparations here.
 
 Basically, what we can cover is upgrading from 1.11 to 2.0, which is written down in
 [docs/upgrade_111_to_20.md](docs/upgrade_111_to_20.md).
+
+## Docker Setup
+
+See [docs/docker.md](docs/docker.md) for information about the docker setup.
