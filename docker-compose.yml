@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: docker/dev/python/Dockerfile
+    environment:
+    - PYTHONUNBUFFERED=1
     volumes:
       - ./app:/app
     ports:
