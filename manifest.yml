@@ -1,0 +1,5 @@
+---
+applications:
+- name: django-task-example
+  memory: 256M
+  buildpack: python_buildpack
