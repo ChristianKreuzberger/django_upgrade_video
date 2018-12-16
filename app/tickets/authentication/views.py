@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic import View
 
 from tickets.authentication.forms import LoginForm, RegistrationForm
+from tickets.authentication.tasks import send_post_signup_email
 
 User = get_user_model()
 
@@ -75,11 +76,12 @@ class RegistrationView(View):
         form = RegistrationForm(request.POST or None)
         if form.is_valid():
             # sign up a new user
-            User.objects.create_user(form.data['username'], form.data['email'], form.data['password'])
+            user = User.objects.create_user(form.data['username'], form.data['email'], form.data['password'])
 
-            # Todo: Show the user a notification
+            # send the user a post signup welcome email
+            send_post_signup_email.delay(user.pk)
 
-            # ToDo: redirect to login view
+            # redirect to login view
             return HttpResponseRedirect('/')
 
         context = {

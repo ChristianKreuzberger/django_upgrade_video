@@ -2,7 +2,7 @@ version: '3'
 volumes:
   pgdata:
 services:
-  python:
+  python: &python
     # image: python:3.5
     build:
       context: .
@@ -16,6 +16,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - postgres
+      - rabbitmq
+      - celery_worker
   postgres:
     image: postgres:10.3
     environment:
@@ -26,3 +28,13 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
+  ## message queue for celery
+  rabbitmq:
+    image: rabbitmq:3.7-alpine
+  celery_worker:
+    <<: *python
+    command: celery -A tickets worker --loglevel=info
+    ports: []
+    depends_on:
+      - rabbitmq
+      - postgres
