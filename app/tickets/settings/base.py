@@ -93,6 +93,8 @@ DATABASES = {
     }
 }
 
+CELERY_BROKER_URL = "amqp://rabbitmq"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
