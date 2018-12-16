@@ -1,4 +1,4 @@
-FROM python:3.4
+FROM python:3.5-jessie
 MAINTAINER ckreuzberger@localhost
 
 COPY ./app /app

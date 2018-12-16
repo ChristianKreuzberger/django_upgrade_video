@@ -9,7 +9,7 @@ The sourcecode of the django app is located in the [app](../app/) folder.
 
 ### Pre-Requesits
 
-The application requires Python 3.4+ ([Python 2 is EOL in 2020](https://pythonclock.org/)) and
+The application requires Python 3.5+ (please note that [Python 2 is EOL in 2020](https://pythonclock.org/)) and
 is best used with a virtual environment. The requirements are available in [app/requirements.txt](app/requirements.txt).
 
 ```bash

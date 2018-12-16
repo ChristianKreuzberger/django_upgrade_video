@@ -3,7 +3,7 @@ volumes:
   pgdata:
 services:
   python:
-    # image: python:3.4
+    # image: python:3.5
     build:
       context: .
       dockerfile: docker/dev/python/Dockerfile
@@ -14,6 +14,8 @@ services:
     ports:
       - 8000:8000
     command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - postgres
   postgres:
     image: postgres:10.3
     environment:

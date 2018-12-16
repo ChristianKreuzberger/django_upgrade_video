@@ -7,7 +7,13 @@ There are two docker compose files within this repository:
 
 # Dev Environment
 
-ToDo
+Setting up the docker dev environment is quite simple (it is assumed you have docker up and running, and you know how to use docker-compose):
+
+1. Run ```docker-compose build``` to build the Dockerfiles for this project
+2. Similar to the instructions in [app.md](app.md), we need to do the following steps:
+2.a: Run migrations: ```docker-compose run --rm python python manage.py migrate```
+2.b: Create a super user: ```docker-compose run --rm python python manage.py createsuperuser```
+3. Last but not least, we can start all services using ```docker-compose up```. You should be able to access the app via **http://0.0.0.0:8000/** in your browser.
 
 # Production Environment
 
