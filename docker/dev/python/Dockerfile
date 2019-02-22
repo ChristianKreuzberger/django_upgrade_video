@@ -1,11 +1,11 @@
-FROM python:3.5-jessie
+FROM python:3.5-slim
 MAINTAINER ckreuzberger@localhost
 
 COPY ./app /app
 
 WORKDIR /app
 
-RUN pip install -r requirements/dev.txt
+RUN pip install --no-cache-dir -r requirements/dev.txt
 
 COPY ./docker/dev/python/entrypoint.sh /entrypoint.sh
 
