@@ -12,7 +12,6 @@ services:
       - DJANGO_SETTINGS_MODULE=tickets.settings.prod
       - PYTHONUNBUFFERED=1
     volumes:
-      - ./app:/app
       - static_files:/static_files
     ports:
       - 8000:8000
