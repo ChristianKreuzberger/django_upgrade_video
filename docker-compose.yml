@@ -8,7 +8,10 @@ services:
       context: .
       dockerfile: docker/dev/python/Dockerfile
     environment:
-    - PYTHONUNBUFFERED=1
+      PYTHONUNBUFFERED: 1
+      DATABASE_URL: postgres://$DATABASE_USER:$DATABASE_PASSWORD@$DATABASE_HOST:$DATABASE_PORT/$DATABASE_NAME
+    env_file:
+      - .env
     volumes:
       - ./app:/app
     ports:
@@ -20,10 +23,12 @@ services:
       - celery_worker
   postgres:
     image: postgres:10.3
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: tickets
-      POSTGRES_DB: tickets
-      POSTGRES_PASS: tickets
+      POSTGRES_USER: $DATABASE_USER
+      POSTGRES_DB: $DATABASE_NAME
+      POSTGRES_PASS: $DATABASE_PASSWORD
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:

@@ -5,3 +5,6 @@ db.sqlite3
 __pycache__/
 app/tickets/settings/prod.py
 app/tickets/debug.log
+
+# .env files
+.env

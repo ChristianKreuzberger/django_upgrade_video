@@ -13,19 +13,28 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+# False if not in os.environ
+DEBUG = env('DEBUG')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
+SECRET_KEY = env('SECRET_KEY')
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = env.str('DJANGO_ALLOWED_HOSTS', default='*').split(',')
 
 
 # Application definition
@@ -82,19 +91,24 @@ WSGI_APPLICATION = 'tickets.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'tickets',
+#         'USER': 'tickets',
+#         'PASSWORD': 'tickets',
+#         'HOST': 'postgres',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tickets',
-        'USER': 'tickets',
-        'PASSWORD': 'tickets',
-        'HOST': 'postgres',
-        'PORT': '5432',
-    }
+    # read os.environ['DATABASE_URL'] and raises ImproperlyConfigured exception if not found
+    'default': env.db(),
 }
 
-CELERY_BROKER_URL = "amqp://rabbitmq"
-
+# CELERY_BROKER_URL = "amqp://rabbitmq"
+CELERY_BROKER_URL = env.str('CELERY_BROKER_URL', default='amqp://rabbitmq')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
