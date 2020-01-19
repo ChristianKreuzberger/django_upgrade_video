@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tickets-celery
+  labels:
+    app: tickets-celery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: tickets-celery
+  template:
+    metadata:
+      labels:
+        name: tickets-celery
+    spec:
+      containers:
+        - name: tickets-celery
+          image: ckreuzberger/tickets:1.0
+          imagePullPolicy: Always
+          command: ["celery"]
+          args: ["-A", "tickets", "worker", "--loglevel=info"]
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+            - name: POSTGRES_DB
+              value: 'tickets'
+            - name: DATABASE_URL
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+            - name: DJANGO_SETTINGS_MODULE
+              value: "tickets.settings.prod"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key
+                  key: secret_key
