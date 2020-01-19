@@ -9,3 +9,4 @@ app/tickets/debug.log
 # .env files
 .env
 deploy/postgres/postgres-credentials.yaml
+deploy/python/python-django-secret-key.yaml

@@ -2,3 +2,4 @@ Django>=1.11,<2.0
 psycopg2-binary
 celery>=4.2,<4.3
 django-environ>=0.4.5,<0.5
+whitenoise>=5.0.1,<5.1
