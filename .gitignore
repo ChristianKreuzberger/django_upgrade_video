@@ -8,3 +8,4 @@ app/tickets/debug.log
 
 # .env files
 .env
+deploy/postgres/postgres-credentials.yaml
